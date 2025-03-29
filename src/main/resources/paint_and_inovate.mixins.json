@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.linnett.paint_and_inovate.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "paint_and_inovate.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
