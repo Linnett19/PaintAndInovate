@@ -1,158 +1,106 @@
 package com.linnett.paint_and_inovate.common.entity.custom;
 
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
-public class RoboCreeperEntity extends Animal {
-    public final AnimationState idleAnimationState = new AnimationState();
-    public final AnimationState walkAnimationState = new AnimationState();
-    public final AnimationState runAnimationState = new AnimationState();
-    public final AnimationState boomAnimationState = new AnimationState();
-    private int idleAnimationTimeout = 0;
-    private boolean isExploding = false;
-    private int explosionCountdown = 0;
+public class RoboCreeperEntity extends Creeper {
 
-    private static final float EXPLOSION_RADIUS = 3.0F;
-    private static final int EXPLOSION_DURATION = 60; // 3 секунды (60 тиков)
+    public final AnimationState idleAnimation = new AnimationState();
+    public final AnimationState walkAnimation = new AnimationState();
+    public final AnimationState runAnimation = new AnimationState();
+    public final AnimationState boomAnimation = new AnimationState();
 
-    public RoboCreeperEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
+    private boolean isRunning = false;
+
+    public RoboCreeperEntity(EntityType<? extends Creeper> entityType, Level level) {
+        super(entityType, level);
     }
 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.5, false));
-        this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(2, new SwellGoal(this));
+        this.goalSelector.addGoal(3, new ChasePlayerGoal(this)); // Новый Goal для погони
+        this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.8D));
+        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Animal.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 20D)
-                .add(Attributes.MOVEMENT_SPEED, 0.25D) // Быстрее обычного крипера
-                .add(Attributes.FOLLOW_RANGE, 16D)
-                .add(Attributes.ATTACK_DAMAGE, 0.0D); // Не атакует, только взрывается
-    }
-
-    @Override
-    public boolean isFood(ItemStack pStack) {
-        return false;
-    }
-
-    @Nullable
-    @Override
-    public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        return null;
+        return Creeper.createAttributes()
+                .add(Attributes.MAX_HEALTH, 20.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.25D)
+                .add(Attributes.FOLLOW_RANGE, 32.0D);
     }
 
     private void setupAnimationStates() {
-        if (this.idleAnimationTimeout <= 0 && !this.isMoving() && !this.isExploding) {
-            this.idleAnimationTimeout = 80;
-            this.idleAnimationState.start(this.tickCount);
-        } else {
-            --this.idleAnimationTimeout;
-        }
-
-        if (this.isExploding) {
-            if (!this.boomAnimationState.isStarted()) {
-                this.boomAnimationState.start(this.tickCount);
+        if (this.isIgnited()) {
+            if (!boomAnimation.isStarted()) {
+                System.out.println("Boom animation started");
+                boomAnimation.start(this.tickCount);
             }
-        } else {
-            this.boomAnimationState.stop();
-        }
-
-        if (!this.isExploding) {
-            if (this.isAggressive() && this.getTarget() != null) {
-                this.runAnimationState.start(this.tickCount);
-                this.walkAnimationState.stop();
-            } else if (this.isMoving()) {
-                this.walkAnimationState.start(this.tickCount);
-                this.runAnimationState.stop();
+        } else if (isRunning) {
+            if (!runAnimation.isStarted()) {
+                System.out.println("Run animation started");
+                runAnimation.start(this.tickCount);
             }
-        }
-    }
-
-
-    private boolean isMoving() {
-        return this.getDeltaMovement().horizontalDistanceSqr() > 0.001;
-    }
-
-    @Override
-    protected void updateWalkAnimation(float pPartialTick) {
-        float f;
-        if (this.getPose() == Pose.STANDING) {
-            f = Math.min(pPartialTick * 6F, 1f);
+            walkAnimation.stop();
+            idleAnimation.stop();
+            boomAnimation.stop();
+        } else if (this.isMoving()) {
+            if (!walkAnimation.isStarted()) {
+                System.out.println("Walk animation started");
+                walkAnimation.start(this.tickCount);
+            }
+            runAnimation.stop();
+            idleAnimation.stop();
+            boomAnimation.stop();
         } else {
-            f = 0f;
+            if (!idleAnimation.isStarted()) {
+                System.out.println("Idle animation started");
+                idleAnimation.start(this.tickCount);
+            }
+            walkAnimation.stop();
+            runAnimation.stop();
+            boomAnimation.stop();
         }
-        this.walkAnimation.update(f, 0.3f);
     }
+
 
     @Override
     public void tick() {
         super.tick();
-
-        // Логика взрыва
-        if (this.isExploding) {
-            if (this.explosionCountdown <= 0) {
-                this.explode();
-            } else {
-                --this.explosionCountdown;
-                // Бешеный бег на игрока
-                LivingEntity target = this.getTarget();
-                if (target != null) {
-                    this.getNavigation().moveTo(target, 1.5);
-                }
-            }
-        }
 
         if (this.level().isClientSide()) {
             this.setupAnimationStates();
         }
     }
 
+    private boolean isMoving() {
+        return this.getDeltaMovement().horizontalDistanceSqr() > 0.001;
+    }
+
     @Override
-    protected void customServerAiStep() {
-        // В креативном режиме игнорирует игрока
-        if (this.level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
-            Player nearestPlayer = this.level().getNearestPlayer(this, 16.0);
-            if (nearestPlayer != null && !nearestPlayer.isCreative()) {
-                this.setTarget(nearestPlayer);
-            }
-        }
-        super.customServerAiStep();
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.CREEPER_HURT;
     }
 
-    private void startExplosion() {
-        if (!this.isExploding) {
-            this.isExploding = true;
-            this.explosionCountdown = EXPLOSION_DURATION;
-            this.boomAnimationState.start(this.tickCount);
-        }
-    }
-
-    private void explode() {
-        if (!this.level().isClientSide()) {
-            this.level().explode(this, this.getX(), this.getY(), this.getZ(), EXPLOSION_RADIUS, Level.ExplosionInteraction.MOB);
-            this.discard();
-        }
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.CREEPER_DEATH;
     }
 
     @Nullable
@@ -161,61 +109,42 @@ public class RoboCreeperEntity extends Animal {
         return SoundEvents.CREEPER_PRIMED;
     }
 
-    @Nullable
-    @Override
-    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-        return SoundEvents.IRON_GOLEM_DAMAGE;
-    }
+    // GOAL для погони за игроком
+    static class ChasePlayerGoal extends Goal {
+        private final RoboCreeperEntity creeper;
+        private Player target;
 
-    @Nullable
-    @Override
-    protected SoundEvent getDeathSound() {
-        return SoundEvents.CREEPER_DEATH;
-    }
-
-    @Override
-    public void die(DamageSource pSource) {
-        super.die(pSource);
-
-        if (!this.level().isClientSide()) {
-            int numPrismarine = this.random.nextInt(3) + 1;
-            int numRedstone = this.random.nextInt(2) + 1;
-
-            for (int i = 0; i < numPrismarine; i++) {
-                ItemEntity item = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), new ItemStack(Items.PRISMARINE_CRYSTALS));
-                this.level().addFreshEntity(item);
-            }
-
-            for (int i = 0; i < numRedstone; i++) {
-                ItemEntity item = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), new ItemStack(Items.REDSTONE));
-                this.level().addFreshEntity(item);
-            }
+        public ChasePlayerGoal(RoboCreeperEntity creeper) {
+            this.creeper = creeper;
         }
-    }
 
-    @Override
-    public boolean hurt(DamageSource pSource, float pAmount) {
-        boolean damage = super.hurt(pSource, pAmount);
-        if (damage && pSource.getEntity() instanceof Player) {
-            Player attacker = (Player) pSource.getEntity();
-            this.setTarget(attacker);
-
-            // Начинает взрыв при низком здоровье
-            if (this.getHealth() < 5.0F) {
-                this.startExplosion();
-            }
+        @Override
+        public boolean canUse() {
+            this.target = this.creeper.level().getNearestPlayer(this.creeper, 16.0);
+            return this.target != null && !this.target.isCreative();
         }
-        return damage;
-    }
 
-    @Override
-    public void aiStep() {
-        super.aiStep();
+        @Override
+        public void start() {
+            this.creeper.isRunning = true;
+            this.creeper.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.3D); // Ускорение
+            this.creeper.getNavigation().moveTo(this.target, 1.5D);
+        }
 
-        // Взрывается, если близко к игроку
-        LivingEntity target = this.getTarget();
-        if (target != null && this.distanceToSqr(target) < 9.0) {
-            this.startExplosion();
+        @Override
+        public void stop() {
+            this.creeper.isRunning = false;
+            this.creeper.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.25D); // Обычная скорость
+            this.target = null;
+        }
+
+        @Override
+        public void tick() {
+            if (this.target != null && this.creeper.distanceToSqr(this.target) < 9.0D) {
+                this.creeper.ignite(); // Начинает взрыв
+            } else {
+                this.creeper.getNavigation().moveTo(this.target, 1.5D);
+            }
         }
     }
 }
