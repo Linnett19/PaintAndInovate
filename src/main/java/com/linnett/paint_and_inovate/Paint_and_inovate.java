@@ -25,12 +25,13 @@ public class Paint_and_inovate {
     public Paint_and_inovate(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.register(this);
-
         HCEntities.register(modEventBus);
 
 
 
         modEventBus.addListener(this::commonSetup);
+
+
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
