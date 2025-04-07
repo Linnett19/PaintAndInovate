@@ -1,7 +1,10 @@
 package com.linnett.paint_and_inovate;
 
+import com.linnett.paint_and_inovate.common.block.ModBlockRegistry;
 import com.linnett.paint_and_inovate.common.entity.HCEntities;
 import com.linnett.paint_and_inovate.common.entity.client.RoboCreeperRenderer;
+import com.linnett.paint_and_inovate.common.item.ModCreativeTabs;
+import com.linnett.paint_and_inovate.common.item.ModItems;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.neoforged.api.distmarker.Dist;
@@ -26,7 +29,11 @@ public class Paint_and_inovate {
         modEventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.register(this);
         HCEntities.register(modEventBus);
+        ModCreativeTabs.register(modEventBus);
 
+
+        ModItems.register(modEventBus);
+        ModBlockRegistry.register(modEventBus);
 
 
         modEventBus.addListener(this::commonSetup);
