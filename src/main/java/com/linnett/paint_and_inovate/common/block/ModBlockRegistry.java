@@ -1,11 +1,11 @@
 package com.linnett.paint_and_inovate.common.block;
 
 import com.linnett.paint_and_inovate.Paint_and_inovate;
+import com.linnett.paint_and_inovate.common.block.custom.LatticeBlock;
 import com.linnett.paint_and_inovate.common.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -18,13 +18,8 @@ public class ModBlockRegistry {
 
 
 
-
-
     public static final DeferredBlock<Block> COPPER_LATTICE = registerBlock("copper_lattice",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(4f).requiresCorrectToolForDrops()
-                    .sound(SoundType.TUFF)));
-
+            () -> new LatticeBlock());
 
 
 
