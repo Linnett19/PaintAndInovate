@@ -12,8 +12,7 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class LatticeBlock extends Block {
     public LatticeBlock() {
-        super(BlockBehaviour.Properties
-                .of()
+        super(BlockBehaviour.Properties.of()
                 .mapColor(MapColor.COLOR_LIGHT_BLUE)
                 .noOcclusion()
                 .isSuffocating((state, world, pos) -> false)
@@ -24,13 +23,21 @@ public class LatticeBlock extends Block {
                 .sound(SoundType.GLASS));
     }
 
+    // Убирает рендеринг соседних граней
     @Override
     public boolean skipRendering(BlockState state, BlockState adjacentBlockState, Direction side) {
         return adjacentBlockState.is(this);
     }
 
+    // Отключает блокировку света
     @Override
     public int getLightBlock(BlockState state, BlockGetter level, BlockPos pos) {
         return 0;
+    }
+
+    // Убирает тени на блоке
+    @Override
+    public float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
+        return 1.0F;
     }
 }

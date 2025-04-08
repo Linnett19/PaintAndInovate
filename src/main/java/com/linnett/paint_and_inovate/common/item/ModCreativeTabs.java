@@ -21,8 +21,16 @@ public class ModCreativeTabs {
                     .displayItems((itemDisplayParameters, output) -> {
 
 
-                        output.accept(ModBlockRegistry.COPPER_LATTICE);
+                        output.accept(ModBlockRegistry.COPPER_LATTICE.get());
+                        output.accept(ModBlockRegistry.EXPOSED_COPPER_LATTICE.get());
+                        output.accept(ModBlockRegistry.WEATHERED_COPPER_LATTICE.get());
+                        output.accept(ModBlockRegistry.OXIDIZED_COPPER_LATTICE.get());
+                        output.accept(ModBlockRegistry.GRATE_5.get());
 
+                        output.accept(ModBlockRegistry.POLISHED_COPPER_BLOCK.get());
+                        output.accept(ModBlockRegistry.POLISHED_EXPOSED_COPPER_BLOCK.get());
+                        output.accept(ModBlockRegistry.POLISHED_WEATHERED_COPPER_BLOCK.get());
+                        output.accept(ModBlockRegistry.POLISHED_OXIDIZED_COPPER_BLOCK.get());
 
                     }).build());
 

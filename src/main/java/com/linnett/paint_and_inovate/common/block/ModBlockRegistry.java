@@ -6,6 +6,7 @@ import com.linnett.paint_and_inovate.common.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -16,10 +17,35 @@ public class ModBlockRegistry {
     public static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(Paint_and_inovate.MODID);
 
-
-
+    // Существующие блоки
     public static final DeferredBlock<Block> COPPER_LATTICE = registerBlock("copper_lattice",
             () -> new LatticeBlock());
+    public static final DeferredBlock<Block> EXPOSED_COPPER_LATTICE = registerBlock("exposed_copper_lattice",
+            () -> new LatticeBlock());
+    public static final DeferredBlock<Block> WEATHERED_COPPER_LATTICE = registerBlock("weathered_copper_lattice",
+            () -> new LatticeBlock());
+    public static final DeferredBlock<Block> OXIDIZED_COPPER_LATTICE = registerBlock("oxidized_copper_lattice",
+            () -> new LatticeBlock());
+    public static final DeferredBlock<Block> GRATE_5 = registerBlock("grate_5",
+            () -> new LatticeBlock());
+
+    // Добавленные полированные блоки
+    public static final DeferredBlock<Block> POLISHED_COPPER_BLOCK = registerBlock("polished_copper_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(4f).requiresCorrectToolForDrops()
+                    .sound(SoundType.TUFF)));
+    public static final DeferredBlock<Block> POLISHED_EXPOSED_COPPER_BLOCK = registerBlock("polished_exposed_copper_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(4f).requiresCorrectToolForDrops()
+                    .sound(SoundType.TUFF)));
+    public static final DeferredBlock<Block> POLISHED_WEATHERED_COPPER_BLOCK = registerBlock("polished_weathered_copper_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(4f).requiresCorrectToolForDrops()
+                    .sound(SoundType.TUFF)));
+    public static final DeferredBlock<Block> POLISHED_OXIDIZED_COPPER_BLOCK = registerBlock("polished_oxidized_copper_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(4f).requiresCorrectToolForDrops()
+                    .sound(SoundType.TUFF)));
 
 
 
