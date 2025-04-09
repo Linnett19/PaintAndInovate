@@ -1,0 +1,12 @@
+{
+	"parent": "block/cube",
+	"render_type": "translucent",
+	"textures": {
+		"down": "paint_and_inovate:block/black",
+		"up": "paint_and_inovate:block/nonn",
+		"north": "paint_and_inovate:block/shadow",
+		"south": "paint_and_inovate:block/shadow",
+		"west": "paint_and_inovate:block/shadow",
+		"east": "paint_and_inovate:block/shadow"
+	}
+}

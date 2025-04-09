@@ -7,28 +7,28 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class LatticeBlock extends Block {
-    public LatticeBlock() {
+
+public class ShadowBlock extends Block {
+
+    private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
+
+    public ShadowBlock() {
         super(BlockBehaviour.Properties.of()
-                .mapColor(MapColor.COLOR_LIGHT_BLUE)
                 .noOcclusion()
+                .strength(1.0F)
                 .isSuffocating((state, world, pos) -> false)
                 .isViewBlocking((state, world, pos) -> false)
-                .isRedstoneConductor((state, world, pos) -> false)
-                .pushReaction(PushReaction.NORMAL)
-                .strength(0.3F)
-                .sound(SoundType.GLASS));
+                .lightLevel(state -> 0)
+                .sound(SoundType.STONE));
     }
 
     @Override
     public boolean skipRendering(BlockState state, BlockState adjacentBlockState, Direction side) {
-        return state.getBlock() == adjacentBlockState.getBlock();
+        return adjacentBlockState.is(this);
     }
-
-
 
     @Override
     public int getLightBlock(BlockState state, BlockGetter level, BlockPos pos) {
@@ -37,6 +37,12 @@ public class LatticeBlock extends Block {
 
     @Override
     public float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
-        return 1.0F;
+        return 0.0F;
+    }
+
+    // Установка хитбокса
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+        return SHAPE;
     }
 }

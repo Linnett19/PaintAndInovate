@@ -2,6 +2,7 @@ package com.linnett.paint_and_inovate.common.block;
 
 import com.linnett.paint_and_inovate.Paint_and_inovate;
 import com.linnett.paint_and_inovate.common.block.custom.LatticeBlock;
+import com.linnett.paint_and_inovate.common.block.custom.ShadowBlock;
 import com.linnett.paint_and_inovate.common.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -17,7 +18,7 @@ public class ModBlockRegistry {
     public static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(Paint_and_inovate.MODID);
 
-    // Существующие блоки
+
     public static final DeferredBlock<Block> COPPER_LATTICE = registerBlock("copper_lattice",
             () -> new LatticeBlock());
     public static final DeferredBlock<Block> EXPOSED_COPPER_LATTICE = registerBlock("exposed_copper_lattice",
@@ -29,7 +30,6 @@ public class ModBlockRegistry {
     public static final DeferredBlock<Block> GRATE_5 = registerBlock("grate_5",
             () -> new LatticeBlock());
 
-    // Добавленные полированные блоки
     public static final DeferredBlock<Block> POLISHED_COPPER_BLOCK = registerBlock("polished_copper_block",
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(4f).requiresCorrectToolForDrops()
@@ -46,6 +46,11 @@ public class ModBlockRegistry {
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(4f).requiresCorrectToolForDrops()
                     .sound(SoundType.TUFF)));
+
+    public static final DeferredBlock<Block> SHADOW = registerBlock("shadow",
+            () -> new ShadowBlock());
+
+
 
 
 
