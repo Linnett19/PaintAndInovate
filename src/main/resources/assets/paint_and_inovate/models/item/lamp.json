@@ -1,6 +1,5 @@
 {
 	"credit": "Made with Blockbench",
-	"render_type": "translucent",
 	"textures": {
 		"0": "paint_and_inovate:block/lamp",
 		"particle": "paint_and_inovate:block/lamp"

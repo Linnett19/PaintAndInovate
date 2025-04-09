@@ -1,0 +1,13 @@
+
+{
+  "parent": "block/cube_column_horizontal",
+  "textures": {
+    "particle": "paint_and_inovate:block/copper_column_up",
+    "down": "paint_and_inovate:block/copper_column_b",
+    "up": "paint_and_inovate:block/copper_column_b",
+    "north": "paint_and_inovate:block/copper_column_up",
+    "east": "paint_and_inovate:block/copper_column_up",
+    "south": "paint_and_inovate:block/copper_column_up",
+    "west": "paint_and_inovate:block/copper_column_up"
+  }
+}

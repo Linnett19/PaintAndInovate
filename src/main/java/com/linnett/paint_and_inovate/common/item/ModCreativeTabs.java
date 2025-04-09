@@ -27,6 +27,9 @@ public class ModCreativeTabs {
                         output.accept(ModBlockRegistry.OXIDIZED_COPPER_LATTICE.get());
                         output.accept(ModBlockRegistry.GRATE_5.get());
 
+                        output.accept(ModBlockRegistry.MIRROR.get());
+                        output.accept(ModBlockRegistry.LAMP.get());
+
                         output.accept(ModBlockRegistry.POLISHED_COPPER_BLOCK.get());
                         output.accept(ModBlockRegistry.POLISHED_EXPOSED_COPPER_BLOCK.get());
                         output.accept(ModBlockRegistry.POLISHED_WEATHERED_COPPER_BLOCK.get());
@@ -35,6 +38,7 @@ public class ModCreativeTabs {
                         output.accept(ModBlockRegistry.SHADOW.get());
                         output.accept(ModItems.POINTER.get());
 
+                        output.accept(ModBlockRegistry.C0PPER_COLUMN.get());
                     }).build());
 
 
