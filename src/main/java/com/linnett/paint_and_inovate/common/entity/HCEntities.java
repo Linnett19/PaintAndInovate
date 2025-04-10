@@ -20,10 +20,14 @@ public class HCEntities {
                     () -> EntityType.Builder.<RoboCreeperEntity>of(RoboCreeperEntity::new, MobCategory.MONSTER)
                             .sized(1.15f, 1.4f)
                             .build(ResourceLocation.fromNamespaceAndPath(Paint_and_inovate.MODID, "robo_creeper").toString())
-
             );
 
-
+    public static final Supplier<EntityType<WhiteEnderEntity>> WHITE_ENDER =
+            ENTITY_TYPES.register("white_ender",
+                    () -> EntityType.Builder.<WhiteEnderEntity>of(WhiteEnderEntity::new, MobCategory.MONSTER)
+                            .sized(1.15f, 1.4f)
+                            .build(ResourceLocation.fromNamespaceAndPath(Paint_and_inovate.MODID, "white_wnder").toString())
+            );
 
 
 

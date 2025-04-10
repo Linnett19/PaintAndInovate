@@ -10,6 +10,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Paint_and_inovate.MODID);
 
+
     public static final DeferredItem<Item> POINTER = ITEMS.register("pointer",
             () -> new PointerItem());
 

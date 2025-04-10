@@ -36,6 +36,7 @@ public class ModCreativeTabs {
                         output.accept(ModBlockRegistry.POLISHED_OXIDIZED_COPPER_BLOCK.get());
 
                         output.accept(ModBlockRegistry.SHADOW.get());
+                        output.accept(ModBlockRegistry.LIGHT.get());
                         output.accept(ModItems.POINTER.get());
 
                         output.accept(ModBlockRegistry.C0PPER_COLUMN.get());

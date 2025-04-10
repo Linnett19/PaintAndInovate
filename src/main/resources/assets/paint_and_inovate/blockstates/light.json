@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=up":    { "model": "paint_and_inovate:block/light", "x": 0, "y": 0 },
+    "facing=down":  { "model": "paint_and_inovate:block/light", "x": 180, "y": 0 },
+    "facing=north": { "model": "paint_and_inovate:block/light", "x": 90, "y": 0 },
+    "facing=south": { "model": "paint_and_inovate:block/light", "x": 270, "y": 0 },
+    "facing=west":  { "model": "paint_and_inovate:block/light", "x": 90, "y": 270 },
+    "facing=east":  { "model": "paint_and_inovate:block/light", "x": 90, "y": 90 }
+  }
+}

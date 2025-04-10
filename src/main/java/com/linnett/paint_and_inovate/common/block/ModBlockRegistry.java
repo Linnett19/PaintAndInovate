@@ -1,7 +1,11 @@
 package com.linnett.paint_and_inovate.common.block;
 
 import com.linnett.paint_and_inovate.Paint_and_inovate;
+import com.linnett.paint_and_inovate.common.block.custom.LampBlock;
 import com.linnett.paint_and_inovate.common.block.custom.LatticeBlock;
+import com.linnett.paint_and_inovate.common.block.custom.LightBlock;
+import com.linnett.paint_and_inovate.common.block.custom.MirrorBlock;
+import com.linnett.paint_and_inovate.common.block.custom.ShadowBlock;
 import com.linnett.paint_and_inovate.common.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -47,6 +51,23 @@ public class ModBlockRegistry {
                     .strength(4f).requiresCorrectToolForDrops()
                     .sound(SoundType.TUFF)));
 
+    public static final DeferredBlock<Block> C0PPER_COLUMN = registerBlock("copper_column",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(4f).requiresCorrectToolForDrops()
+                    .sound(SoundType.TUFF)));
+
+    public static final DeferredBlock<Block> SHADOW = registerBlock("shadow",
+            () -> new ShadowBlock());
+
+    public static final DeferredBlock<Block> LIGHT = registerBlock("light",
+            () -> new LightBlock());
+
+
+    public static final DeferredBlock<Block> MIRROR = registerBlock("mirror",
+            () -> new MirrorBlock());
+
+    public static final DeferredBlock<Block> LAMP = registerBlock("lamp",
+            () -> new LampBlock());
 
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {

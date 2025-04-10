@@ -15,19 +15,19 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
-public class ShadowBlock extends Block {
+public class LightBlock extends Block {
 
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
     private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
 
-    public ShadowBlock() {
+    public LightBlock() {
         super(BlockBehaviour.Properties.of()
                 .noOcclusion()
                 .strength(1.0F)
                 .isSuffocating((state, world, pos) -> false)
                 .isViewBlocking((state, world, pos) -> false)
-                .lightLevel(state -> 0)
+                .lightLevel(state -> 15)
                 .sound(SoundType.STONE));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.UP));
     }
@@ -59,6 +59,6 @@ public class ShadowBlock extends Block {
 
     @Override
     public float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
-        return 0.0F;
+        return 1.0F;
     }
 }
