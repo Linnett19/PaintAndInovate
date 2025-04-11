@@ -1,6 +1,7 @@
 package com.linnett.paint_and_inovate.common.item;
 
 import com.linnett.paint_and_inovate.Paint_and_inovate;
+import com.linnett.paint_and_inovate.common.item.custom.AgarAgarItem;
 import com.linnett.paint_and_inovate.common.item.custom.PointerItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
@@ -14,7 +15,8 @@ public class ModItems {
     public static final DeferredItem<Item> POINTER = ITEMS.register("pointer",
             () -> new PointerItem());
 
-
+    public static final DeferredItem<Item> AGAR_AGAR = ITEMS.register("agar_agar",
+            () -> new AgarAgarItem());
 
 
     public static void register(IEventBus eventBus) {

@@ -1,7 +1,8 @@
 {
   "variants": {
-    "": {
-      "model": "paint_and_inovate:block/mirror"
-    }
+    "facing=north": { "model": "paint_and_inovate:block/mirror", "y": 180 },
+    "facing=south": { "model": "paint_and_inovate:block/mirror", "y": 0 },
+    "facing=west":  { "model": "paint_and_inovate:block/mirror", "y": 90 },
+    "facing=east":  { "model": "paint_and_inovate:block/mirror", "y": 270 }
   }
 }
