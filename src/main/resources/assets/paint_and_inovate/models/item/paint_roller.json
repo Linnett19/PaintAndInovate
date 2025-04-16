@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "paint_and_inovate:item/paint_roller_hand"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "paint_and_inovate:item/paint_roller_gui"
+    },
+    "ground": {
+      "parent": "paint_and_inovate:item/paint_roller_gui"
+    },
+    "fixed": {
+      "parent": "paint_and_inovate:item/paint_roller_gui"
+    }
+  }
+}

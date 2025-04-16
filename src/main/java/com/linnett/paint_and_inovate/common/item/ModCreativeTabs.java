@@ -25,21 +25,17 @@ public class ModCreativeTabs {
                         output.accept(ModBlockRegistry.EXPOSED_COPPER_LATTICE.get());
                         output.accept(ModBlockRegistry.WEATHERED_COPPER_LATTICE.get());
                         output.accept(ModBlockRegistry.OXIDIZED_COPPER_LATTICE.get());
-                        output.accept(ModBlockRegistry.GRATE_5.get());
 
-                        output.accept(ModBlockRegistry.MIRROR.get());
+                        output.accept(ModBlockRegistry.COPPER_COLUMN.get());
+                        output.accept(ModBlockRegistry.EXPOSED_COPPER_COLUMN.get());
+                        output.accept(ModBlockRegistry.WEATHERED_COPPER_COLUMN.get());
+                        output.accept(ModBlockRegistry.OXIDIZED_COPPER_COLUMN.get());
+
                         output.accept(ModBlockRegistry.LAMP.get());
 
-                        output.accept(ModBlockRegistry.POLISHED_COPPER_BLOCK.get());
-                        output.accept(ModBlockRegistry.POLISHED_EXPOSED_COPPER_BLOCK.get());
-                        output.accept(ModBlockRegistry.POLISHED_WEATHERED_COPPER_BLOCK.get());
-                        output.accept(ModBlockRegistry.POLISHED_OXIDIZED_COPPER_BLOCK.get());
-
-                        output.accept(ModBlockRegistry.SHADOW.get());
-                        output.accept(ModBlockRegistry.LIGHT.get());
+                        output.accept(ModItems.ELIXIR_DOUBLING.get());
+                        output.accept(ModItems.PAINT_ROLLER.get());
                         output.accept(ModItems.POINTER.get());
-
-                        output.accept(ModBlockRegistry.C0PPER_COLUMN.get());
                     }).build());
 
 

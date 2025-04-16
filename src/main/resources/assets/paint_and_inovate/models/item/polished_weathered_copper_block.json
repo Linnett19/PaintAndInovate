@@ -1,6 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "paint_and_inovate:block/polished_weathered_copper_block"
-  }
-}

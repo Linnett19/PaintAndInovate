@@ -1,4 +1,31 @@
 {
-  "creativetab.paint_and_inovate.copper": "Copper Engineering"
+  "creativetab.paint_and_inovate.copper": "§kCopper Quarry",
+
+
+  "block.paint_and_inovate.copper_lattice": "Copper Lattice",
+  "block.paint_and_inovate.exposed_copper_lattice": "Exposed Copper Lattice",
+  "block.paint_and_inovate.weathered_copper_lattice": "Weathered Copper Lattice",
+  "block.paint_and_inovate.oxidized_copper_lattice": "Oxidized Copper Lattice",
+
+  "block.paint_and_inovate.polished_copper_block": "Polished Copper Block",
+  "block.paint_and_inovate.polished_exposed_copper_block": "Polished Exposed Copper Block",
+  "block.paint_and_inovate.polished_weathered_copper_block": "Polished Weathered Copper Block",
+  "block.paint_and_inovate.polished_oxidized_copper_block": "Polished Oxidized Copper Block",
+
+  "block.paint_and_inovate.copper_column": "Copper Column",
+  "block.paint_and_inovate.exposed_copper_column": "Exposed Copper Column",
+  "block.paint_and_inovate.weathered_copper_column": "Weathered Copper Column",
+  "block.paint_and_inovate.oxidized_copper_column": "Oxidized Copper Column",
+
+  "block.paint_and_inovate.lamp": "Lamp",
+
+  "item.paint_and_inovate.paint_roller": "Paint Roller",
+  "item.paint_and_inovate.elixir_doubling": "Elixir o' Doubling",
+  "item.paint_and_inovate.elixir_doubling.tooltip": "Extends all your current potion effects by 42 seconds",
+  "item.paint_and_inovate.effect": "Effect:",
+
+
+  "message.paint_and_inovate.cannot_paint": "\u274C Cannot paint it"
 
 }
+

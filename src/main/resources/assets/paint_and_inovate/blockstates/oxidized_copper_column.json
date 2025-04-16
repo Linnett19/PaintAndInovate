@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=y": { "model": "paint_and_inovate:block/oxidized_copper_column" },
+    "axis=x": { "model": "paint_and_inovate:block/oxidized_copper_column", "x": 90, "y": 90 },
+    "axis=z": { "model": "paint_and_inovate:block/oxidized_copper_column", "x": 90 }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "paint_and_inovate:item/paint_roller"
+  }
+}

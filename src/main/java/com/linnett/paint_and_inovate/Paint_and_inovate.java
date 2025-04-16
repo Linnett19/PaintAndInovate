@@ -1,7 +1,6 @@
 package com.linnett.paint_and_inovate;
 
 import com.linnett.paint_and_inovate.common.block.ModBlockRegistry;
-import com.linnett.paint_and_inovate.common.effects.ModEffects;
 import com.linnett.paint_and_inovate.common.entity.HCEntities;
 import com.linnett.paint_and_inovate.common.entity.client.RoboCreeperRenderer;
 import com.linnett.paint_and_inovate.common.item.ModCreativeTabs;
@@ -35,8 +34,6 @@ public class Paint_and_inovate {
 
         ModItems.register(modEventBus);
         ModBlockRegistry.register(modEventBus);
-        ModEffects.EFFECTS.register(modEventBus);
-
         modEventBus.addListener(this::commonSetup);
 
 
