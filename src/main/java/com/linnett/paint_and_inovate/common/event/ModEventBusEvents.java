@@ -17,9 +17,6 @@ import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
 @EventBusSubscriber(modid = Paint_and_inovate.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class ModEventBusEvents {
-
-
-
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
 
@@ -33,6 +30,4 @@ public class ModEventBusEvents {
         event.put(HCEntities.ROBO_CREEPER.get(), RoboCreeperEntity.createAttributes().build());
 
     }
-
 }
-//
